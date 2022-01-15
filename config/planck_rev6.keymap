@@ -21,7 +21,20 @@
 // https://github.com/manna-harbour/qmk_firmware/tree/miryoku/users/manna-harbour_miryoku
 // https://precondition.github.io/home-row-mods
 
+&caps_word {
+    continue-list = <UNDERSCORE MINUS>;
+};
+
 / {
+    combos {
+        compatible = "zmk,combos";
+        combo_capitalize {
+            timeout-ms = <50>;
+            key-positions = <16 19>;
+            bindings = <&caps_word>;
+        };
+    };
+
     behaviors {
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
