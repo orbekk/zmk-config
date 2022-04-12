@@ -46,11 +46,12 @@
 #define UPR    3
 #define NAV    4
 #define FN     5
+#define MOUSE  6
 
-#define HM1(k) hm LGUI  k
-#define HM2(k) hm LALT  k
-#define HM3(k) hm LCTL  k
-#define HM4(k) hm LSHFT k
+#define HM1(k) hm_slow LGUI  k
+#define HM2(k) hm_med LALT  k
+#define HM3(k) hm_med LCTL  k
+#define HM4(k) hm_fast LSHFT k
 // #define HM1(k) kp k
 // #define HM2(k) kp k
 // #define HM3(k) kp k
@@ -62,12 +63,30 @@
 
 / {
     behaviors {
-        hm: homerow_mods {
+        hm_slow: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <250>;
+            quick-tap-ms = <250>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+        hm_med: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+        hm_fast: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <100>;
+            quick-tap-ms = <100>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
@@ -145,6 +164,18 @@
 &trans      &trans       &trans        &trans       &trans
                         >;
                 };
+
+                mouse_layer {
+                // Waiting for https://github.com/zmkfirmware/zmk/pull/778
+                        bindings = <
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+
+&trans      &trans       &trans        &trans       &trans
+                        >;
+                };
+
 
 //                adjust_layer {
 // -----------------------------------------------------------------------------------------
